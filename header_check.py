@@ -11,8 +11,6 @@ station = Station()
 trips = Trip()
 rides = Ride()
 
-files = station.paths
-
 def loop_through(files:list)->pd.DataFrame:
     dataset = pd.DataFrame()
     for path in files:
