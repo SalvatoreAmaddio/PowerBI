@@ -27,6 +27,25 @@ class AbstractSample:
     def selected_columns(self)->list:
         pass
     
+    def year_improvement(self, year:int)->int:
+        if year == 14:
+            return 300
+        if year == 15:
+            return 400
+        if year == 16:
+            return 500
+        if year == 17:
+            return 600
+        if year == 15:
+            return 700
+        if year == 2020:
+            return 800
+        if year == 2021:
+            return 900
+        if year == 2022:
+            return 1000
+        return 0
+    
     def extract_sample(self, path: str)-> pd.DataFrame:
         df_header = pd.read_csv(path, nrows=0)
         column_count = len(df_header.columns)
@@ -34,12 +53,13 @@ class AbstractSample:
         data_set = pd.read_csv(path, names=self.new_column_names, header=0, usecols = self.selected_columns())    
         data_set['startTime'] = pd.to_datetime(data_set['startTime'], errors='coerce')
         data_set['stopTime'] = pd.to_datetime(data_set['stopTime'], errors='coerce')
-        data_set['month'] = data_set['startTime'].dt.month        
+        data_set['month'] = data_set['startTime'].dt.month  
+        year = data_set['startTime'].dt.year
         data_set['fromStationID'] = data_set['fromStationID'].astype(str)
         data_set['toStationID'] = data_set['toStationID'].astype(str)
         data_set = data_set[pd.notna(data_set['fromStationID']) & data_set['fromStationID'].str.isnumeric()]
         data_set = data_set[pd.notna(data_set['toStationID']) & data_set['toStationID'].str.isnumeric()]
-        return data_set.groupby('month').head(500)
+        return data_set.groupby('month').head(self.year_improvement(year))
 
 class Trip(AbstractSample):
 
