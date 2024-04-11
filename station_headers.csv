@@ -1,0 +1,10 @@
+0,1,2,3,4,5,6,7
+id,name,latitude,longitude,dpcapacity,landmark,online date,
+id,name,latitude,longitude,dpcapacity,online date,,
+id,name,latitude,longitude,dpcapacity,dateCreated,,
+id,name,latitude,longitude,dpcapacity,landmark,,
+id,name,latitude,longitude,dpcapacity,online_date,,
+id,name,latitude,longitude,dpcapacity,online_date,,
+id,name,latitude,longitude,dpcapacity,online_date,,
+id,name,city,latitude,longitude,dpcapacity,online_date,
+id,name,city,latitude,longitude,dpcapacity,online_date,Unnamed: 7
