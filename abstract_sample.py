@@ -34,7 +34,9 @@ class AbstractSample:
         data_set = pd.read_csv(path, names=self.new_column_names, header=0, usecols = self.selected_columns())    
         data_set['startTime'] = pd.to_datetime(data_set['startTime'], errors='coerce')
         data_set['stopTime'] = pd.to_datetime(data_set['stopTime'], errors='coerce')
-        data_set['month'] = data_set['startTime'].dt.month
+        data_set['month'] = data_set['startTime'].dt.month        
+        data_set = data_set[pd.notna(data_set['fromStationID']) & data_set['fromStationID'].str.isnumeric()]
+        data_set = data_set[pd.notna(data_set['toStationID']) & data_set['toStationID'].str.isnumeric()]
         return data_set.groupby('month').head(500)
 
 class Trip(AbstractSample):
