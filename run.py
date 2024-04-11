@@ -14,7 +14,7 @@ def main():
         task_trips = executor.submit(process_files_with_processes, trip)
         task_rides = executor.submit(process_files_with_processes, ride)
         task_stations = executor.submit(process_files_with_processes, station)
-        print("Waiting for reading task to complete...")
+        print("Waiting for reading task to complete. Go grab a coffee...")
         trips_sample = task_trips.result()
         rides_sample = task_rides.result()
         station_sample = task_stations.result()
