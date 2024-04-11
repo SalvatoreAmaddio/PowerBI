@@ -1,5 +1,5 @@
 import pandas as pd
-from functions import ProcessPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from abstract_sample import AbstractSample
 
 def remove_last_col(sample:pd.DataFrame)->pd.DataFrame:

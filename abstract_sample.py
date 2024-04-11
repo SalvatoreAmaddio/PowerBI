@@ -68,5 +68,9 @@ class Station(AbstractSample):
         return ['stationID', 'stationName', 'latitude', 'longitude']
     
     def extract_sample(self, path: str)-> pd.DataFrame:
-        return pd.read_csv(path, names=self.rename_columns_as(), header=0, usecols = self.selected_columns())    
+        df_header = pd.read_csv(path, nrows=0)
+        if 'city' in df_header.columns:
+            return pd.read_csv(path, names=['stationID', 'stationName', 'city', 'latitude', 'longitude'], header=0, usecols = self.selected_columns())    
+        else:
+            return pd.read_csv(path, names=self.rename_columns_as(), header=0, usecols = self.selected_columns())    
 

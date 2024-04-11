@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from functions import remove_last_col, print_to_csv, process_files_with_processes
+from functions import *
 from concurrent.futures import ThreadPoolExecutor, wait
 from abstract_sample import Trip, Ride, Station
     
@@ -18,10 +18,13 @@ def main():
         trips_sample = task_trips.result()
         rides_sample = task_rides.result()
         station_sample = task_stations.result()
+        print("All Read")
 
+        station_sample = station_sample[station.selected_columns()]
+        print("Printing stations...")        
         task_stations = executor.submit(print_to_csv, station_sample, "stations.csv")
-        print("Read")
 
+        print("Adjusting columns...")        
         task_trips = executor.submit(remove_last_col, trips_sample)
         task_rides = executor.submit(remove_last_col, rides_sample)
         trips_sample = task_trips.result()
