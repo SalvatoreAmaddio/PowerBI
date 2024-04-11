@@ -1,8 +1,7 @@
 import pandas as pd
-import numpy as np
-from functions import *
 from concurrent.futures import ThreadPoolExecutor, wait
-from abstract_sample import Trip, Ride, Station
+from .scripts.functions import *
+from .scripts.abstract_sample import Trip, Ride, Station
     
 def main():
     print("Start Reading. The process might take up to 3 minute...")
@@ -22,7 +21,7 @@ def main():
 
         station_sample = station_sample[station.selected_columns()]
         print("Printing stations...")        
-        task_stations = executor.submit(print_to_csv, station_sample, "stations.csv")
+        task_stations = executor.submit(print_to_csv, station_sample, "processed_data\stations.csv")
 
         print("Adjusting columns...")        
         task_trips = executor.submit(remove_last_col, trips_sample)
@@ -33,7 +32,7 @@ def main():
         rides_sample = rides_sample[ride.selected_columns()]
         sample = pd.concat([trips_sample,rides_sample], ignore_index=True)
         #print
-        task_sample = executor.submit(print_to_csv, sample, "sample.csv")
+        task_sample = executor.submit(print_to_csv, sample, "processed_data\trips.csv")
         wait([task_sample, task_stations])       
         print("Both processes completed.")
 
