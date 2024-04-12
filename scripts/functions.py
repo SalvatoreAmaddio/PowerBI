@@ -8,7 +8,7 @@ def remove_last_col(sample:pd.DataFrame)->pd.DataFrame:
 def print_to_csv(sample:pd.DataFrame, file_name:str):
     sample.to_csv(file_name, index=False)
 
-# Function to process files using ProcessPoolExecutor  file_paths, dir:int = 0
+# Function to process files simultaneously
 def process_files_with_processes(abstract_sample:AbstractSample):
     samples = []
     with ProcessPoolExecutor() as executor:

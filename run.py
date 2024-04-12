@@ -10,6 +10,7 @@ def main():
         ride = Ride()
         station = Station()
         print("Reading...")
+        #read the directories at the same time.
         task_trips = executor.submit(process_files_with_processes, trip)
         task_rides = executor.submit(process_files_with_processes, ride)
         task_stations = executor.submit(process_files_with_processes, station)
@@ -28,11 +29,15 @@ def main():
         task_rides = executor.submit(remove_last_col, rides_sample)
         trips_sample = task_trips.result()
         rides_sample = task_rides.result()
-
         rides_sample = rides_sample[ride.selected_columns()]
+
+        #put the datasets from Rides and Trips into one        
         sample = pd.concat([trips_sample,rides_sample], ignore_index=True)
-        #print
+
+        #print data_trips
         task_sample = executor.submit(print_to_csv, sample, "processed_data\data_trips.csv")
+        
+        #ensure both data_trips and stations are printed before terminating the program.
         wait([task_sample, task_stations])       
         print("Both processes completed.")
 
