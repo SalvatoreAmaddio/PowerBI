@@ -1,4 +1,5 @@
 # PowerBI Assessment
+This project combines both Python and PowerBI technologies. It cleans a dataset and imports it into a PowerBI file.
 
 original dataset: https://www.kaggle.com/datasets/algorismus/cyclistic
  
